@@ -1,13 +1,9 @@
 import { BookmarkX } from "lucide-react";
 import { ListItem } from "./ListItem";
-
-export type ListItem = {
-  description: string;
-  checked: boolean;
-};
+import { ListItemType } from "@/types/ListItems";
 
 export interface TodoListProps {
-  listItems: ListItem[];
+  listItems: ListItemType[];
 }
 
 export function TodoList({ listItems }: TodoListProps) {
@@ -32,7 +28,11 @@ export function TodoList({ listItems }: TodoListProps) {
       >
         {listItems && listItems?.length > 0 ? (
           listItems.map((item, i) => (
-            <ListItem key={i} description={item.description} />
+            <ListItem
+              key={i}
+              description={item.description}
+              checked={item.checked}
+            />
           ))
         ) : (
           <>

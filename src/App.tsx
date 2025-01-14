@@ -2,11 +2,12 @@ import { useState } from "react";
 import { Header } from "./components/Header";
 import { SearchBar } from "./components/SearchBar";
 import { TodoList } from "./components/TodoList";
+import { ListItemType } from "./types/ListItems";
 
 function App() {
-  const [taskList, setTaskList] = useState([""]);
+  const [taskList, setTaskList] = useState<ListItemType[]>([]);
 
-  function handleAddTask(task: string) {
+  function handleAddTask(task: ListItemType) {
     setTaskList([...taskList, task]);
   }
 

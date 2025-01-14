@@ -1,8 +1,9 @@
+import { ListItemType } from "@/types/ListItems";
 import { PlusCircle } from "lucide-react";
 import { useRef } from "react";
 
 export interface SearchBarProps {
-  addTask: (task: string) => void;
+  addTask: (task: ListItemType) => void;
 }
 
 export function SearchBar({ addTask }: SearchBarProps) {
@@ -10,8 +11,18 @@ export function SearchBar({ addTask }: SearchBarProps) {
 
   function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
-    const task = taskRef.current?.value || "";
+    const taskDescription = taskRef.current?.value || "";
+
+    const task = {
+      description: taskDescription,
+      checked: false,
+    };
+
     addTask(task);
+
+    if (taskRef.current) {
+      taskRef.current.value = "";
+    }
   }
 
   return (
@@ -27,7 +38,7 @@ export function SearchBar({ addTask }: SearchBarProps) {
         placeholder="Adicione uma nova tarefa"
       />
       <button
-        type="button"
+        type="submit"
         className="flex gap-2 rounded-lg bg-gradient-to-r from-[#4EA8DE] to-[#5E60CE] p-4 text-white"
       >
         Criar <PlusCircle />

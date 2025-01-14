@@ -3,10 +3,11 @@ import { useState } from "react";
 
 interface ListItemProps {
   description: string;
+  checked: boolean;
 }
 
-export function ListItem({ description }: ListItemProps) {
-  const [taskCheck, setTaskCheck] = useState(false);
+export function ListItem({ description, checked }: ListItemProps) {
+  const [taskCheck, setTaskCheck] = useState(checked);
 
   return (
     <div className="mb-3 flex h-20 w-full items-start justify-around gap-4 rounded-lg bg-[#262626] px-6 py-4">
