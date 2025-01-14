@@ -1,14 +1,16 @@
 import { BookmarkX } from "lucide-react";
-import { useState } from "react";
 import { ListItem } from "./ListItem";
 
 export type ListItem = {
   description: string;
+  checked: boolean;
 };
 
-export function TodoList() {
-  const [listItems, setListItems] = useState<ListItem[]>();
+export interface TodoListProps {
+  listItems: ListItem[];
+}
 
+export function TodoList({ listItems }: TodoListProps) {
   return (
     <div className="flex h-3/4 w-full flex-col items-center justify-center">
       <div className="flex w-full justify-between px-8 pb-6">
