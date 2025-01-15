@@ -2,13 +2,17 @@ import { useState } from "react";
 import { Header } from "./components/Header";
 import { SearchBar } from "./components/SearchBar";
 import { TodoList } from "./components/TodoList";
-import { ListItemType } from "./types/ListItems";
+import { ListItemType } from "./types/list-item";
 
 function App() {
-  const [taskList, setTaskList] = useState<ListItemType[]>([]);
+  const [itemsList, setItemsSList] = useState<ListItemType[]>([]);
 
-  function handleAddTask(task: ListItemType) {
-    setTaskList([...taskList, task]);
+  function handleAddItem(item: ListItemType) {
+    setItemsSList([...itemsList, item]);
+  }
+
+  function handleDeleteTask(itemId: number) {
+    setItemsSList((prev) => prev.filter((item) => item.id !== itemId));
   }
 
   return (
@@ -16,8 +20,8 @@ function App() {
       <Header />
       <main className="flex h-4/5 w-full flex-col items-center bg-[#1A1A1A]">
         <div className="h-4/5 w-3/5">
-          <SearchBar addTask={handleAddTask} />
-          <TodoList listItems={taskList} />
+          <SearchBar addItem={handleAddItem} />
+          <TodoList items={itemsList} deleteItem={handleDeleteTask} />
         </div>
       </main>
     </>

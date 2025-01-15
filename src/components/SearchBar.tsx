@@ -1,27 +1,33 @@
-import { ListItemType } from "@/types/ListItems";
+import { ListItemType } from "@/types/list-item";
 import { PlusCircle } from "lucide-react";
-import { useRef } from "react";
+import { useRef, useState } from "react";
 
 export interface SearchBarProps {
-  addTask: (task: ListItemType) => void;
+  addItem: (item: ListItemType) => void;
 }
 
-export function SearchBar({ addTask }: SearchBarProps) {
-  const taskRef = useRef<HTMLInputElement>(null);
+export function SearchBar({ addItem }: SearchBarProps) {
+  const itemRef = useRef<HTMLInputElement>(null);
+  const [itemsIds, setItemsIds] = useState<number[]>([]);
 
   function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
-    const taskDescription = taskRef.current?.value || "";
+    const itemDescription = itemRef.current?.value || "";
 
-    const task = {
-      description: taskDescription,
+    const nextId =
+      itemsIds.length === 0 ? 1 : itemsIds[itemsIds.length - 1] + 1;
+    setItemsIds([...itemsIds, nextId]);
+
+    const item = {
+      id: nextId,
+      description: itemDescription,
       checked: false,
     };
 
-    addTask(task);
+    addItem(item);
 
-    if (taskRef.current) {
-      taskRef.current.value = "";
+    if (itemRef.current) {
+      itemRef.current.value = "";
     }
   }
 
@@ -32,8 +38,8 @@ export function SearchBar({ addTask }: SearchBarProps) {
     >
       <input
         type="text"
-        name="task"
-        ref={taskRef}
+        name="description"
+        ref={itemRef}
         className="w-4/5 rounded-2xl bg-[#333333] pl-4 text-[#808080] focus:border-cyan-500"
         placeholder="Adicione uma nova tarefa"
       />
