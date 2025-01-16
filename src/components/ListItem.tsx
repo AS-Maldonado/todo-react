@@ -17,7 +17,7 @@ export function ListItem({
   const [itemCheck, setItemCheck] = useState(checked);
 
   return (
-    <div className="mb-3 flex h-20 w-full items-center justify-around gap-4 rounded-lg bg-[#262626] px-6 py-4">
+    <div className="mb-3 flex min-h-20 w-full flex-wrap items-center justify-around gap-4 rounded-lg bg-[#262626] px-6 py-4">
       {!itemCheck ? (
         <button
           className="mt-1 h-6 w-6 rounded-full border-2 border-[#4EA8DE]"
@@ -32,7 +32,7 @@ export function ListItem({
       )}
 
       <p
-        className={`text-[#F2F2F2] ${itemCheck && "!text-[#808080] line-through"}`}
+        className={`break-all text-[#F2F2F2] ${itemCheck ? "!text-[#808080] line-through" : ""}`}
       >
         {description}
       </p>

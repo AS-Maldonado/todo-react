@@ -18,8 +18,8 @@ function App() {
   return (
     <>
       <Header />
-      <main className="flex h-4/5 w-full flex-col items-center bg-[#1A1A1A]">
-        <div className="h-4/5 w-3/5">
+      <main className="flex h-auto min-h-screen w-full flex-col items-center bg-[#1A1A1A]">
+        <div className="w-4/5 md:w-3/5">
           <SearchBar addItem={handleAddItem} />
           <TodoList items={itemsList} deleteItem={handleDeleteTask} />
         </div>
